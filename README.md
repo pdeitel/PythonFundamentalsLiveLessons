@@ -1,5 +1,5 @@
 # Python Fundamentals LiveLessons
-This repository contains the source code and supporting files associated with our Python Fundamentals LiveLessons videos, which are based on our professional book <a href=https://amzn.to/2Kd8dQk target="_blank">_Python for Programmers_</a> and our textbook <a href=https://amzn.to/2KfCptN target="_blank">_Intro to Python for Computer Science and Data Science: Learning to Program with AI, Big Data and the Cloud_.</a>
+This repository contains the source code and supporting files associated with our **_Python Fundamentals LiveLessons_** videos, which are based on our professional book <a href=https://amzn.to/2Kd8dQk target="_blank">_Python for Programmers_</a> and our textbook <a href=https://amzn.to/2KfCptN target="_blank">_Intro to Python for Computer Science and Data Science: Learning to Program with AI, Big Data and the Cloud_.</a>
     
 ![Cover image for Python for Programmers](http://deitel.com/bookresources/PythonFP/PythonForProgrammersCover.png)
 
