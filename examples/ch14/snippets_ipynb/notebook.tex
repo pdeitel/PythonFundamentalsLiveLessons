@@ -1,0 +1,903 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{16\_02-03}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{case-study-classification-with-k-nearest-neighbors-and-the-digits-dataset-part-1}{%
+\section{16.2 Case Study: Classification with k-Nearest Neighbors and
+the Digits Dataset, Part
+1}\label{case-study-classification-with-k-nearest-neighbors-and-the-digits-dataset-part-1}}
+
+\textbf{This file contains Sections 16.2 and 16.3 and all of their
+subsections and Self Check exercises}
+
+\hypertarget{classification-problems}{%
+\subsubsection{Classification Problems}\label{classification-problems}}
+
+\hypertarget{our-approach}{%
+\subsubsection{Our Approach}\label{our-approach}}
+
+    \includegraphics{art/check.png} \#\# 16.2 Self Check
+
+\textbf{1. \emph{(Fill-In)}} \texttt{\_\_\_\_\_\_\_\_} classification
+divides samples into two distinct classes, and
+\texttt{\_\_\_\_\_\_\_\_}-classification divides samples into many
+distinct classes.
+
+\textbf{Answer:} binary, multi.
+
+    \hypertarget{k-nearest-neighbors-algorithm}{%
+\subsection{16.2.1 k-Nearest Neighbors
+Algorithm}\label{k-nearest-neighbors-algorithm}}
+
+\hypertarget{hyperparameters-and-hyperparameter-tuning}{%
+\subsubsection{Hyperparameters and Hyperparameter
+Tuning}\label{hyperparameters-and-hyperparameter-tuning}}
+
+    \includegraphics{art/check.png} \#\# 16.2.1 Self Check \textbf{1.
+\emph{(True/False)}} In machine learning, a model implements a
+machine-learning algorithm. In scikit-learn, models are called
+estimators.
+
+\textbf{Answer:} True.
+
+\textbf{2. \emph{(Fill-In)}} The process of choosing the best value of
+\textbf{\emph{k}} for the k-nearest neighbors algorithm is called
+\texttt{\_\_\_\_\_\_\_\_}.
+
+\textbf{Answer:} hyperparameter tuning.
+
+    \hypertarget{loading-the-dataset}{%
+\subsection{16.2.2 Loading the Dataset}\label{loading-the-dataset}}
+
+\textbf{We added \texttt{\%matplotlib\ inline} to enable Matplotlib in
+this notebook.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{load\PYZus{}digits}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits} \PY{o}{=} \PY{n}{load\PYZus{}digits}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{displaying-the-description}{%
+\subsubsection{Displaying the
+Description}\label{displaying-the-description}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{digits}\PY{o}{.}\PY{n}{DESCR}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{checking-the-sample-and-target-sizes}{%
+\subsubsection{Checking the Sample and Target
+Sizes}\label{checking-the-sample-and-target-sizes}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \hypertarget{a-sample-digit-image}{%
+\subsubsection{A Sample Digit Image}\label{a-sample-digit-image}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{13}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{preparing-the-data-for-use-with-scikit-learn}{%
+\subsubsection{Preparing the Data for Use with
+Scikit-Learn}\label{preparing-the-data-for-use-with-scikit-learn}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{13}\PY{p}{]}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.2.2 Self Check
+
+\textbf{1. \emph{(Fill-In)}} A \texttt{Bunch} object's
+\texttt{\_\_\_\_\_\_\_\_} and \texttt{\_\_\_\_\_\_\_\_} attributes are
+NumPy arrays containing the dataset's samples and labels, respectively.
+
+\textbf{Answer:} \texttt{data}, \texttt{target}.
+
+\textbf{2. \emph{(True/False)}} A scikit-learn \texttt{Bunch} object
+contains only a dataset's data.
+
+\textbf{Answer:} False. A scikit-learn \texttt{Bunch} object contains a
+dataset's data and information about the dataset (called metadata),
+available through the \texttt{DESCR} attribute.
+
+\textbf{3. \emph{(IPython Session)}} For sample number \texttt{22} in
+the Digits dataset, display the 8-by-8 image data and numeric value of
+the digit the image represents.
+
+\textbf{Answer:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{visualizing-the-data}{%
+\subsection{16.2.3 Visualizing the Data}\label{visualizing-the-data}}
+
+\hypertarget{creating-the-diagram}{%
+\subsubsection{Creating the Diagram}\label{creating-the-diagram}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{figure}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Displaying Each Image and Removing the Axes Labels }
+        
+        \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{axes}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{digits}\PY{o}{.}\PY{n}{images}\PY{p}{,} \PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{)}\PY{p}{:}
+            \PY{n}{axes}\PY{p}{,} \PY{n}{image}\PY{p}{,} \PY{n}{target} \PY{o}{=} \PY{n}{item}
+            \PY{n}{axes}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray\PYZus{}r}\PY{p}{)}
+            \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} remove x\PYZhy{}axis tick marks}
+            \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} remove y\PYZhy{}axis tick marks}
+            \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} This placeholder cell was added because we had to combine }
+        \PY{c+c1}{\PYZsh{} the sections snippets 22\PYZhy{}26 for the visualization to work in Jupyter}
+        \PY{c+c1}{\PYZsh{} and want the subsequent snippet numbers to match the book}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.2.3 Self Check \textbf{1.
+\emph{(Fill-In)}} The process of familiarizing yourself with your data
+is called \texttt{\_\_\_\_\_\_\_\_}.
+
+\textbf{Answer:} data exploration.
+
+\textbf{2. \emph{(IPython Session)}} Display the image for sample number
+\texttt{22} of the Digits dataset.
+
+\textbf{Answer:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{image} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{digits}\PY{o}{.}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray\PYZus{}r}\PY{p}{)}
+        
+        \PY{n}{xticks} \PY{o}{=} \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{yticks} \PY{o}{=} \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} placeholder due to merge of prior cells}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} placeholder due to merge of prior cells}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} placeholder due to merge of prior cells}
+\end{Verbatim}
+
+
+    \hypertarget{splitting-the-data-for-training-and-testing}{%
+\subsection{16.2.4 Splitting the Data for Training and
+Testing}\label{splitting-the-data-for-training-and-testing}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}
+             \PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{training-and-testing-set-sizes}{%
+\subsubsection{Training and Testing Set
+Sizes}\label{training-and-testing-set-sizes}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.2.4 Self Check \textbf{1.
+\emph{(True/False)}} You should typically use all of a dataset's data to
+train a model.
+
+\textbf{Answer:} False. It's important to set aside a portion of your
+data for testing, so you can evaluate a model's performance using data
+that the model has not yet seen.
+
+\textbf{2. \emph{(Discussion)}} For the Digits dataset, what numbers of
+samples would the following statement reserve for training and testing
+purposes? X\_train, X\_test, y\_train, y\_test = train\_test\_split(
+digits.data, digits.target, test\_size=0.40)
+
+\textbf{Answer:} 1078 and 719.
+
+    \hypertarget{creating-the-model}{%
+\subsection{16.2.5 Creating the Model}\label{creating-the-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{training-the-model}{%
+\subsection{16.2.6 Training the Model}\label{training-the-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.2.6 Self Check \textbf{1.
+\emph{(Fill-In)}} The \texttt{KNeighborsClassifier} is said to be
+\texttt{\_\_\_\_\_\_\_\_} because its work is performed only when you
+use it to make predictions.
+
+\textbf{Answer:} lazy.
+
+\textbf{2. \emph{(True/False)}} Each scikit-learn estimator's
+\texttt{fit} method simply loads a dataset.
+
+\textbf{Answer:} False. For most, scikit-learn estimators, the
+\texttt{fit} method loads the data into the estimator then uses that
+data to perform complex calculations behind the scenes that learn from
+the data and train the model.
+
+    \hypertarget{predicting-digit-classes}{%
+\subsection{16.2.7 Predicting Digit
+Classes}\label{predicting-digit-classes}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{predicted} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{expected} \PY{o}{=} \PY{n}{y\PYZus{}test}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{predicted}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{expected}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{wrong} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{e}\PY{p}{)} \PY{k}{for} \PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{e}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{predicted}\PY{p}{,} \PY{n}{expected}\PY{p}{)} \PY{k}{if} \PY{n}{p} \PY{o}{!=} \PY{n}{e}\PY{p}{]}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.2.7 Self Check \textbf{1.
+\emph{(IPython Session)}} Using the \texttt{predicted} and
+\texttt{expected} arrays, calculate and display the prediction accuracy
+percentage.
+
+\textbf{Answer:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{(len(expected) \PYZhy{} len(wrong)) / len(expected):.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{2. \emph{(IPython Session)}} Rewrite the list comprehension in
+snippet \texttt{{[}29{]}} using a for loop. Which coding style do you
+prefer?
+
+\textbf{Answer:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{wrong} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{p}\PY{p}{,} \PY{n}{e} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{predicted}\PY{p}{,} \PY{n}{expected}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{p} \PY{o}{!=} \PY{n}{e}\PY{p}{:}
+                  \PY{n}{wrong}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{e}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{wrong}
+\end{Verbatim}
+
+
+    \hypertarget{case-study-classification-with-k-nearest-neighbors-and-the-digits-dataset-part-2}{%
+\section{16.3 Case Study: Classification with k-Nearest Neighbors and
+the Digits Dataset, Part
+2}\label{case-study-classification-with-k-nearest-neighbors-and-the-digits-dataset-part-2}}
+
+\hypertarget{metrics-for-model-accuracy}{%
+\subsection{16.3.1 Metrics for Model
+Accuracy}\label{metrics-for-model-accuracy}}
+
+\hypertarget{estimator-method-score}{%
+\subsubsection{\texorpdfstring{Estimator Method
+\texttt{score}}{Estimator Method score}}\label{estimator-method-score}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{knn.score(X\PYZus{}test, y\PYZus{}test):.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{confusion-matrix}{%
+\subsubsection{Confusion Matrix}\label{confusion-matrix}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{confusion} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{o}{=}\PY{n}{expected}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{o}{=}\PY{n}{predicted}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{confusion}
+\end{Verbatim}
+
+
+    \hypertarget{classification-report}{%
+\subsubsection{Classification Report}\label{classification-report}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{digit}\PY{p}{)} \PY{k}{for} \PY{n}{digit} \PY{o+ow}{in} \PY{n}{digits}\PY{o}{.}\PY{n}{target\PYZus{}names}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{expected}\PY{p}{,} \PY{n}{predicted}\PY{p}{,} 
+               \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{visualizing-the-confusion-matrix}{%
+\subsubsection{Visualizing the Confusion
+Matrix}\label{visualizing-the-confusion-matrix}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{confusion\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{confusion}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{axes} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{confusion\PYZus{}df}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                            \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nipy\PYZus{}spectral\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.3.1 Self Check \textbf{1.
+\emph{(Fill-In)}} A Seaborn \texttt{\_\_\_\_\_\_\_\_} displays values as
+colors, often with values of higher magnitude displayed as more intense
+colors.
+
+\textbf{Answer:} heat map.
+
+\textbf{2. \emph{(True/False)}} In a classification report, the
+precision specifies the total number of correct predictions for a class
+divided by the total number of samples for that class.
+
+\textbf{Answer:} True.
+
+\textbf{3. \emph{(Discussion)}} Explain row 3 of the confusion matrix
+presented in this section: {[} 0, 0, 0, 42, 0, 1, 0, 1, 0, 0{]}
+
+\textbf{Answer:} The number \texttt{42} in column index 3 indicates that
+42 \texttt{3}s were correctly predicted as 3s. The number \texttt{1} at
+column indices 5 and 7 indicates that one \texttt{3} was incorrectly
+classified as a \texttt{5} and one was incorrectly classified as a
+\texttt{7}.
+
+    \hypertarget{k-fold-cross-validation}{%
+\subsection{16.3.2 K-Fold
+Cross-Validation}\label{k-fold-cross-validation}}
+
+\hypertarget{kfold-class}{%
+\subsubsection{KFold Class}\label{kfold-class}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{using-the-kfold-object-with-function-cross_val_score}{%
+\subsubsection{\texorpdfstring{Using the \texttt{KFold} Object with
+Function
+\texttt{cross\_val\_score}}{Using the KFold Object with Function cross\_val\_score}}\label{using-the-kfold-object-with-function-cross_val_score}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{knn}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{p}{,} 
+             \PY{n}{y}\PY{o}{=}\PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{scores}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{scores.mean():.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy standard deviation: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{scores.std():.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.3.2 Self Check \textbf{1.
+\emph{(True/False)}} Randomizing the data by shuffling it before
+splitting it into folds is particularly important if the samples might
+be ordered or grouped.
+
+\textbf{Answer:} True.
+
+\textbf{2. \emph{(True/False)}} When you call \texttt{cross\_val\_score}
+to peform k-fold cross-validation, the function returns the best score
+produced while testing the model with each fold.
+
+\textbf{Answer:} False. The function returns an array containing the
+scores for each fold. The mean of those scores is the estimator's
+overall score.
+
+    \hypertarget{running-multiple-models-to-find-the-best-one}{%
+\subsection{16.3.3 Running Multiple Models to Find the Best
+One}\label{running-multiple-models-to-find-the-best-one}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{estimators} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KNeighborsClassifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{knn}\PY{p}{,} 
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{SVC}\PY{p}{(}\PY{n}{gamma}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GaussianNB}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{estimator\PYZus{}name}\PY{p}{,} \PY{n}{estimator\PYZus{}object} \PY{o+ow}{in} \PY{n}{estimators}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{estimator\PYZus{}object}\PY{p}{,} 
+                 \PY{n}{X}\PY{o}{=}\PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}estimator\PYZus{}name:\PYZgt{}20\PYZcb{}}\PY{l+s+s1}{: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} 
+                   \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy=}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{scores.mean():.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}; }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}
+                   \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{standard deviation=}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{scores.std():.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{scikit-learn-estimator-diagram}{%
+\subsubsection{Scikit-Learn Estimator
+Diagram}\label{scikit-learn-estimator-diagram}}
+
+    \includegraphics{art/check.png} \#\# 16.3.3 Self Check \textbf{1.
+\emph{(True/False)}} You should choose the best estimator before
+performing your machine learning study.
+
+\textbf{Answer:} False. It's difficult to know in advance which machine
+learning model(s) will perform best for a given dataset, especially when
+they hide the details of how they operate from their users. For this
+reason, you should run multiple models to determine which is the best
+for your study.
+
+\textbf{2. \emph{(Discussion)}} How would you modify the code in this
+section to so that it would also test a \texttt{LinearSVC} estimator?
+
+\textbf{Answer:} You'd import the \texttt{LinearSVC} class, add a
+key--value pair to the \texttt{estimators} dictionary
+(\texttt{\textquotesingle{}LinearSVC\textquotesingle{}:\ LinearSVC()}),
+then execute the \texttt{for} loop, which tests every estimator in the
+dictionary.
+
+    \hypertarget{hyperparameter-tuning}{%
+\subsection{16.3.4 Hyperparameter Tuning}\label{hyperparameter-tuning}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{knn}\PY{p}{,} 
+                 \PY{n}{X}\PY{o}{=}\PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k=}\PY{l+s+si}{\PYZob{}k:\PYZlt{}2\PYZcb{}}\PY{l+s+s1}{; accuracy=}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{scores.mean():.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}; }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}
+                   \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{standard deviation=}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{scores.std():.2}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \includegraphics{art/check.png} \#\# 16.3.4 Self Check \textbf{1.
+\emph{(True/False)}} When you create an estimator object, the default
+hyperparameter values that scikit-learn uses are generally the best ones
+for every machine learning study.
+
+\textbf{Answer:} False. The default hyperparameter values make it easy
+for you to test estimators quickly. In real-world machine learning
+studies, you'll want to use hyperparameter tuning to choose
+hyperparameter values that produce the best possible predictions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} (C) Copyright 2019 by Deitel \PYZam{} Associates, Inc. and                    \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Pearson Education, Inc. All Rights Reserved.                           \PYZsh{}}
+        \PY{c+c1}{\PYZsh{}                                                                        \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} DISCLAIMER: The authors and publisher of this book have used their     \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} best efforts in preparing the book. These efforts include the          \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} development, research, and testing of the theories and programs        \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} to determine their effectiveness. The authors and publisher make       \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} no warranty of any kind, expressed or implied, with regard to these    \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} programs or to the documentation contained in these books. The authors \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} and publisher shall not be liable in any event for incidental or       \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} consequential damages in connection with, or arising out of, the       \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} furnishing, performance, or use of these programs.                     \PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
