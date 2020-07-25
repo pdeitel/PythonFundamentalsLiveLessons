@@ -1,4 +1,7 @@
 # Python Fundamentals LiveLessons
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pdeitel/PythonFundamentalsLiveLessons/master)
+
 This repository contains the source code and supporting files associated with our **_Python Fundamentals LiveLessons_** videos, which are based on our professional book <a href=https://amzn.to/2Kd8dQk target="_blank">_Python for Programmers_</a> and our textbook <a href=https://amzn.to/2KfCptN target="_blank">_Intro to Python for Computer Science and Data Science: Learning to Program with AI, Big Data and the Cloud_.</a>
     
 <img src="https://deitel.com/wp-content/uploads/2020/01/python-for-programmers.jpg" alt="Cover image for Python for Programmers" width=300/>
