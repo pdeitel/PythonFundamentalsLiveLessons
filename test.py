@@ -1,7 +1,7 @@
-import math
-import statistics
+from account import Account
+from decimal import Decimal
 
+value=Decimal('12.34')
 
-
-x=math.sqrt(statistics.pvariance([1,3,4,2,6,5,3,4,5,2]))
-print(x)
+account1 = Account('John Green',Decimal('50.00'))
+print(account1.name)
