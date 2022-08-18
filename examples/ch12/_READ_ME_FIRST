@@ -1,0 +1,20 @@
+**Upgrading from Twitter v1.1 to Twitter v2**
+On August 18, 2022, we discovered that new Twitter developer accounts cannot access the Twitter version 1.1 APIs on which we based Lesson 12, Data Mining Twitter, and two case studies in Lesson 16, Big Data: Hadoop, Spark, NoSQL and IoT. 
+
+Twitter users who already had Twitter developer accounts can still access the Twitter version 1.1 APIs, but viewers will not fall into this category.
+ 
+We’re updating Lesson 12 and the two case studies in Lesson 16 to the Twitter version 2 APIs. We anticipate this could take two to four weeks as we:
+1.	master the new Twitter v2 APIs,
+2.	update our Lesson 12 and 16 code examples, and
+3.	update the source-code files and Jupyter Notebooks in this repository.
+
+Once completed, we’ll:
+•	rerecord Lesson 12 and the relevant sections of Lesson 16,
+•	post an updated version of Chapter 12 and the relevant sections of Chapter 16 to the book’s webpages at https://informit.com and https://deitel.com,
+•	post updated files to this GitHub repository. 
+ 
+If you have any questions, please email paul@deitel.com.
+
+
+
+
