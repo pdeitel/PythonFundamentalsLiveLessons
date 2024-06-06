@@ -14,7 +14,7 @@ values, frequencies = np.unique(rolls, return_counts=True)
 
 title = f'Rolling a Six-Sided Die {len(rolls):,} Times'
 sns.set_style('whitegrid')  # white backround with gray grid lines
-axes = sns.barplot(values, frequencies, palette='bright')  # create bars
+axes = sns.barplot(x=values, y=frequencies, palette='bright')  # create bars
 axes.set_title(title)  # set graph title
 axes.set(xlabel='Die Value', ylabel='Frequency')  # label the axes
 
