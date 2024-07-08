@@ -14,7 +14,7 @@ def update(frame_number, rolls, faces, frequencies):
 
     # reconfigure plot for updated die frequencies
     plt.cla()  # clear old contents contents of current Figure
-    axes = sns.barplot(faces, frequencies, palette='bright')  # new bars
+    axes = sns.barplot(x=faces, y=frequencies, palette='bright')  # new bars
     axes.set_title(f'Die Frequencies for {sum(frequencies):,} Rolls')
     axes.set(xlabel='Die Value', ylabel='Frequency')  
     axes.set_ylim(top=max(frequencies) * 1.10)  # scale y-axis by 10%
